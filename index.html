@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>anida® — El sistema operativo del financiamiento de vivienda</title>
+<meta name="description" content="anida® — El sistema operativo del financiamiento de vivienda.">
+<meta name="theme-color" content="#014eaa">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preload" as="image" href="cielo.webp">
+<link rel="preload" as="image" href="edificio.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde:#22c986;
+    --blanco:#fff;
+    --azul:#014eaa;
+    --logo-w:200px;
+    --txt:22px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Figtree",system-ui,sans-serif;
+    color:var(--blanco);
+    background-color:var(--azul);
+    min-height:100vh;min-height:100dvh;
+    display:flex;flex-direction:column;
+    -webkit-font-smoothing:antialiased;
+  }
+  main{
+    flex:1;
+    display:flex;flex-direction:column;align-items:center;
+    padding:clamp(48px,12vh,130px) 16px 48px;
+    text-align:center;
+  }
+  .logo{width:var(--logo-w);height:auto;display:block;filter:drop-shadow(0 2px 14px rgba(0,30,90,.35))}
+  h1{
+    margin-top:clamp(56px,16vh,140px);
+    font-weight:400;
+    font-size:var(--txt);
+    line-height:1.4;
+    max-width:22ch;
+    text-shadow:0 1px 14px rgba(0,30,90,.55),0 0 2px rgba(0,30,90,.35);
+  }
+  @media (min-width:768px){ h1{max-width:none} }
+  /* ---- Escena en capas: cielo · nubes · edificio ---- */
+  .escena{position:fixed;inset:0;z-index:-1;overflow:hidden;background:var(--azul)}
+  .capa{position:absolute;inset:0;background-repeat:no-repeat;
+    background-size:cover;background-position:var(--bx,50%) bottom}
+  .cielo{background-image:url("cielo.webp"),url("cielo.jpg")}
+  .nubes{background-image:url("nubes.webp");opacity:.9}
+  /* Nubes que cruzan: cada una con su tamaño, altura, velocidad y transparencia */
+  .vuelo{position:absolute;inset:0;pointer-events:none}
+  .vuelo img{position:absolute;left:100%;height:auto;will-change:transform;
+    animation:cruza var(--t) linear var(--d) infinite}
+  .n1{width:clamp(220px,30vw,460px);top:6%; --t:150s;--d:-40s;opacity:.75}
+  .n2{width:clamp(260px,38vw,560px);top:52%;--t:190s;--d:-120s;opacity:.6}
+  .n3{width:clamp(180px,24vw,360px);top:34%;--t:120s;--d:-75s;opacity:.55;filter:blur(1.5px);transform:scaleX(-1)}
+  .n4{width:clamp(120px,15vw,230px);top:70%;--t:105s;--d:-20s;opacity:.7}
+  .n5{width:clamp(110px,13vw,200px);top:18%;--t:170s;--d:-150s;opacity:.4;filter:blur(2px)}
+  @keyframes cruza{from{translate:0 0}to{translate:calc(-100vw - 100% - 40px) 0}}
+  .brillo{background:radial-gradient(120% 60% at 70% 0%,rgba(255,255,255,.16),rgba(255,255,255,0) 60%);
+    animation:luz 14s ease-in-out infinite alternate}
+  .edificio{background-image:url("edificio.webp");
+    animation:entra 1.6s cubic-bezier(.2,.7,.2,1) both}
+  .velo{display:none}
+  @keyframes luz{from{opacity:.4;transform:translateX(-4%)}to{opacity:1;transform:translateX(4%)}}
+  @keyframes entra{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+  main > *{animation:aparece 1.2s .2s cubic-bezier(.2,.7,.2,1) both}
+  main > h1{animation-delay:.45s}
+  @keyframes aparece{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    .vuelo img,.edificio,.brillo,main > *{animation:none}
+  }
+  @media (max-width:1023px){ .escena{--bx:20%} }
+  @media (max-width:767px){
+    .capa{background-size:170% auto;--bx:0%}
+    .n5,.n3{display:none}
+    .velo{display:block;background:linear-gradient(to bottom,var(--azul) 0,var(--azul) 48%,rgba(1,78,170,0) 64%)}
+  }
+  footer{
+    padding:56px 16px calc(22px + env(safe-area-inset-bottom));
+    text-align:center;
+    background:linear-gradient(to bottom,rgba(1,24,64,0) 0%,rgba(1,24,64,.45) 55%,rgba(1,24,64,.7) 100%);
+  }
+  footer p{font-size:13px;letter-spacing:.02em;color:rgba(255,255,255,.95)}
+  footer sup{font-size:.75em;line-height:0}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  /* Desktop grande ≥1440 */
+  @media (min-width:1440px){ :root{--logo-w:230px;--txt:26px} }
+  /* Desktop 1024–1439 */
+  @media (max-width:1439px){ :root{--logo-w:200px;--txt:22px} }
+  /* Tablet 768–1023 */
+  @media (max-width:1023px){
+    :root{--logo-w:180px;--txt:20px}
+  }
+  /* Mobile <768 */
+  @media (max-width:767px){
+    :root{--logo-w:150px;--txt:18px}
+  }
+  /* Mobile chico ≤375 */
+  @media (max-width:375px){ :root{--logo-w:130px;--txt:17px} }
+</style>
+</head>
+<body>
+<div class="escena" aria-hidden="true"><div class="capa cielo"></div><div class="capa brillo"></div><div class="capa nubes"></div><div class="vuelo"><img class="n1" src="nube1.webp" alt=""><img class="n2" src="nube2.webp" alt=""><img class="n3" src="nube3.webp" alt=""><img class="n4" src="nube4.webp" alt=""><img class="n5" src="nube5.webp" alt=""></div><div class="capa edificio"></div><div class="capa velo"></div></div>
+<main>
+  <svg class="logo" viewBox="0 0 278 204.55" role="img" aria-labelledby="t">
+    <title id="t">anida®</title>
+    <g>
+      <path fill="#22c986" d="M97.75,105c-28.95,0-52.5-23.55-52.5-52.5S68.8,0,97.75,0C121.15,0,134.08,13.72,143.64,27.130c9.86,13.84,18.28,19.23,30.01,19.23,18.03,0,32.710-14.67,32.71-32.71V1.77h19.8v11.89c0,28.95-23.55,52.5-52.5,52.5-23.36,0-36.43-13.92-46.13-27.54-9.78-13.72-17.840-18.82-29.76-18.82-18.03,0-32.71,14.67-32.71,32.71s14.67,32.71,32.71,32.71c8.09,0,15.85-2.96,21.84-8.34l1.02-.91,13.66,14.33-1.06.97c-9.67,8.86-22.26,13.75-35.45,13.75Z"/>
+      <path fill="#fff" d="M153.35,105c-22.08,0-34.31-10.85-45.89-27.14-10.21-14.37-17.78-19.22-30-19.22-18.03,0-32.71,14.67-32.71,32.71v11.12h-19.8v-11.12c0-28.95,23.55-52.5,52.5-52.5,23.34,0,35.97,13.24,46.14,27.55,10,14.07,17.51,18.81,29.76,18.81,18.03,0,32.71-14.67,32.71-32.71s-14.67-32.71-32.71-32.71c-6.720,0-13.17,2.01-18.65,5.82l-.91.63-15.03-13.31,1.28-1.05C129.37,4.22,141.2,0,153.35,0,182.3,0,205.85,23.55,205.85,52.5s-23.55,52.5-52.5,52.5Z"/>
+      <path fill="#22c986" d="M143.65,27.18C134.11,13.79,121.1,0,97.75,0c-28.95,0-52.5,23.55-52.5,52.5s23.55,52.5,52.5,52.5v-19.8c-18.03,0-32.71-14.67-32.71-32.71s14.67-32.71,32.71-32.71c11.89,0,20.05,5.15,29.8,18.85,9.68,13.59,22.73,27.48,46.03,27.48v-19.76c-11.71,0-20.1-5.38-29.940-19.19Z"/>
+    </g>
+    <g fill="#fff">
+      <path d="M62.38,153.13h7.76v7.96c3.74-5.99,9.39-8.98,16.95-8.98,6.06,0,10.62,1.79,13.68,5.36,3.06,3.57,4.59,8.59,4.59,15.060v30.32h-7.76v-29.1c0-4.63-.97-8.13-2.91-10.52-1.94-2.38-5.16-3.57-9.65-3.57-4.08,0-7.59,1.45-10.52,4.34-2.93,2.89-4.39,6.55-4.39,10.98v27.87h-7.76v-49.72Z"/>
+      <path d="M118.25,136.08c.99-1.02,2.19-1.53,3.62-1.53s2.64.51,3.62,1.53c.99,1.02,1.48,2.25,1.48,3.68s-.49,2.55-1.48,3.57c-.99,1.02-2.19,1.53-3.62,1.53s-2.64-.51-3.62-1.53c-.99-1.02-1.48-2.21-1.48-3.57,0-1.43.49-2.65,1.48-3.68ZM117.89,153.13h7.76v49.72h-7.76v-49.72Z"/>
+      <path d="M190.15,195.72h-1.29c-1.83,0-3.32-1.49-3.32-3.38v-57.32h-8.34v28.13c-1.77-3.06-4.23-5.66-7.39-7.81-3.16-2.15-6.72-3.22-10.7-3.22-4.36,0-8.23,1.2-11.6,3.59-3.38,2.39-6.03,5.57-7.96,9.55-1.93,3.97-2.89,8.35-2.89,13.13,0,3.49.58,6.8,1.75,9.93,1.17,3.13,2.81,5.93,4.93,8.38,2.11,2.46,4.61,4.38,7.48,5.77,2.87,1.39,6.01,2.08,9.42,2.08s6.95-.94,10.23-2.83c2.68-1.54,6.05-5.26,8.07-7.98.67,5.27,5.04,9.35,10.33,9.35h1.39l-.11-7.37ZM177.21,185.82c-.32,1.55-.98,3.01-1.99,4.4-1.01,1.39-2.24,2.59-3.69,3.63-1.45,1.03-2.98,1.84-4.59,2.420-1.61.58-3.17.87-4.69.87-2.4,0-4.63-.48-6.68-1.45-2.05-.97-3.85-2.32-5.4-4.06-1.55-1.74-2.75-3.74-3.6-5.99-.85-2.26-1.28-4.64-1.28-7.15s.38-4.8,1.14-7.05c.76-2.26,1.85-4.27,3.27-6.04,1.42-1.77,3.13-3.19,5.12-4.25,1.99-1.06,4.21-1.59,6.68-1.59,2.08,0,4.18.53,6.3,1.59,2.12,1.06,4.03,2.48,5.73,4.25,1.71,1.77,2.94,3.75,3.69,5.94v14.5Z"/>
+      <path d="M250.96,195.72h-1.29c-1.83,0-3.32-1.49-3.32-3.38h-.04s0-39.2,0-39.2h-7.76v8.58c-4.15-6.4-10.21-9.6-18.17-9.6-6.81,0-12.51,2.52-17.1,7.56-4.59,5.04-6.890,11.16-6.89,18.38s2.3,13.24,6.89,18.28c4.59,5.04,10.29,7.55,17.1,7.55,8.03,0,14.09-3.16,18.17-9.49l.14.14c.99,4.88,5.17,8.57,10.19,8.57h2.19l-.11-7.37ZM232.46,191.11c-3.27,3.470-7.28,5.21-12.05,5.21s-9-1.75-12.3-5.26c-3.3-3.51-4.95-7.84-4.95-13.02s1.65-9.53,4.95-13.07c3.3-3.54,7.4-5.31,12.3-5.31s8.87,1.77,12.1,5.31c3.23,3.54,4.85,7.9,4.85,13.07s-1.63,9.6-4.9,13.07Z"/>
+      <path d="M54.68,203.09l-.11-7.37h-1.29c-1.83,0-3.32-1.49-3.32-3.38h-.04s0-39.2,0-39.2h-7.76v8.58c-4.15-6.4-10.21-9.6-18.17-9.6-6.81,0-12.51,2.52-17.1,7.56-4.59,5.04-6.89,11.16-6.89,18.38s2.3,13.24,6.89,18.28c4.59,5.04,10.29,7.55,17.1,7.55,8.03,0,14.09-3.16,18.17-9.49l.14.15c.81,3.97,3.73,7.15,7.5,8.19l.12.13v-.1c.82.22,1.68.34,2.57.34h2.19ZM37.27,191.11c-3.27,3.47-7.28,5.21-12.05,5.21s-9-1.75-12.3-5.26c-3.3-3.51-4.95-7.84-4.95-13.02s1.65-9.53,4.95-13.07c3.3-3.54,7.4-5.31,12.3-5.31s8.87,1.77,12.1,5.31c3.23,3.54,4.85,7.9,4.85,13.07s-1.63,9.6-4.9,13.07Z"/>
+      <text x="255" y="203.1" font-family="Figtree,Arial,sans-serif" font-size="27" font-weight="400" fill="#fff">®</text>
+    </g>
+  </svg>
+  <span class="sr">anida®</span>
+  <h1>El sistema operativo del financiamiento de vivienda.</h1>
+</main>
+<footer><p>anida<sup>®</sup> es una marca registrada.</p></footer>
+</body>
+</html>
