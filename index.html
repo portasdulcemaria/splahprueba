@@ -19,6 +19,7 @@
     --azul:#014eaa;
     --logo-w:200px;
     --txt:22px;
+    --pie:20px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
@@ -81,12 +82,14 @@
     .n5,.n3{display:none}
     .velo{display:block;background:linear-gradient(to bottom,var(--azul) 0,var(--azul) 48%,rgba(1,78,170,0) 64%)}
   }
+  /* Footer — spec Figma: padding 64/16/32 · Figtree 400 · lh 120% · blanco 92% */
   footer{
-    padding:56px 16px calc(22px + env(safe-area-inset-bottom));
+    padding:64px 16px calc(32px + env(safe-area-inset-bottom));
     text-align:center;
-    background:linear-gradient(to bottom,rgba(1,24,64,0) 0%,rgba(1,24,64,.45) 55%,rgba(1,24,64,.7) 100%);
+    background:linear-gradient(to bottom,rgba(1,40,100,0) 0%,rgba(1,40,100,.55) 100%);
   }
-  footer p{font-size:13px;letter-spacing:.02em;color:rgba(255,255,255,.95)}
+  footer p{font-size:var(--pie);line-height:1.2;font-weight:400;color:rgba(255,255,255,.92);
+    text-shadow:0 1px 6px rgba(0,25,70,.55)}
   footer sup{font-size:.75em;line-height:0}
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
@@ -96,11 +99,11 @@
   @media (max-width:1439px){ :root{--logo-w:200px;--txt:22px} }
   /* Tablet 768–1023 */
   @media (max-width:1023px){
-    :root{--logo-w:180px;--txt:20px}
+    :root{--logo-w:180px;--txt:20px;--pie:18px}
   }
   /* Mobile <768 */
   @media (max-width:767px){
-    :root{--logo-w:150px;--txt:18px}
+    :root{--logo-w:150px;--txt:18px;--pie:16px}
   }
   /* Mobile chico ≤375 */
   @media (max-width:375px){ :root{--logo-w:130px;--txt:17px} }
